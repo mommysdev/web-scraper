@@ -1,0 +1,31 @@
+name: "Пример: парсинг каталога товаров"
+base_url: "https://books.toscrape.com/catalogue/page-{page}.html"
+engine: static
+
+selectors:
+  container: "article.product_pod"
+  fields:
+    title:
+      selector: "h3 a"
+      attribute: "title"
+    price: ".price_color"
+    availability: ".availability"
+    url:
+      selector: "h3 a"
+      attribute: "href"
+    rating:
+      selector: "p.star-rating"
+      attribute: "class"
+
+pagination:
+  type: page_number
+  max_pages: 5
+
+settings:
+  delay: 1.0
+  timeout: 30
+  retry_count: 3
+
+output:
+  format: csv
+  filename: "books.csv"
